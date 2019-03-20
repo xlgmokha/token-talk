@@ -1,4 +1,4 @@
 #!/bin/bash
 
-gem install vimdeck
-vimdeck presentation.md
+rm -fr presentation/*
+vimdeck slideshow --no-ascii presentation.md
