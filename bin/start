@@ -1,0 +1,4 @@
+#!/bin/bash
+
+gem install vimdeck
+vimdeck presentation.md
