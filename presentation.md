@@ -1,13 +1,17 @@
 # Tokens
 
-
-# 1. Authentication vs Authorization
-
-Authentication: to verify the identity of the user given the credentials received.
-Authorization: to determine if the user should be granted access to a particular resource.
+by mo
 
 
-# 2. Roles:
+#
+
+Authentication vs Authorization
+
+* Authentication: to verify the identity of the user given the credentials received.
+* Authorization: to determine if the user should be granted access to a particular resource.
+
+
+# Roles
 
 * RO - Resource Owner
 * RS - Resource Server
@@ -15,10 +19,9 @@ Authorization: to determine if the user should be granted access to a particular
 * C - Client
 
 
-# 3. Protocol Flow - RFC-6749 section-1.2
+# Protocol Flow
 
-1.2.  Protocol Flow
-
+```text
      +--------+                               +---------------+
      |        |--(A)- Authorization Request ->|   Resource    |
      |        |                               |     Owner     |
@@ -36,13 +39,13 @@ Authorization: to determine if the user should be granted access to a particular
      |        |                               |     Server    |
      |        |<-(F)--- Protected Resource ---|               |
      +--------+                               +---------------+
+```
 
 * https://tools.ietf.org/html/rfc6749#section-1.2
 
 
-# 3a. Protocol Flow - RFC-6749 section-1.5
+# Protocol Flow
 
-[Refresh Token Usage](https://tools.ietf.org/html/rfc6749#section-1.5)
 ```text
     +--------+                                           +---------------+
     |        |--(A)------- Authorization Grant --------->|               |
@@ -65,6 +68,7 @@ Authorization: to determine if the user should be granted access to a particular
     |        |<-(H)----------- Access Token -------------|               |
     +--------+           & Optional Refresh Token        +---------------+
 ```
+* https://tools.ietf.org/html/rfc6749#section-1.5
 
 
-7. Token Types
+# 7. Token Types
