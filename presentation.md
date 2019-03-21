@@ -3,7 +3,6 @@
 ### aka OAuth 2.0 - Token Exchange
 ## with mo
 
-
 # Agenda
 
 * 1. Authentication vs Authorization
@@ -234,8 +233,6 @@ it cannot be re-used.
 Refresh Token Grant: This grant can be used by a client to exchange a
 `refresh token` for a new `access token` and `refresh token`.
 
-Request:
-
 ```text
 POST /token HTTP/1.1
 Authorization: Basic base64(client_id:client_secret)
@@ -259,12 +256,6 @@ Pragma: no-cache
   "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA",
 }
 ```
-
-
-# Tokens - Expiration & Refresh
-
-To understand when to request a new access and refresh token we need
-to talk about OAuth 2.0.
 
 
 # Roles - OAuth 2.0
@@ -352,28 +343,6 @@ behalf.
     |        |                                           |               |
     |        |<-(H)----------- Access Token -------------|               |
     +--------+           & Optional Refresh Token        +---------------+
-```
-
-
-# Protocol Flow - Accessing a Protected Resource
-
-`GET /api/policies/`
-
-```text
-GET /api/policies/
-Authorization: Bearer access_token
-Accept: application/json
-Content-Type: application/json
-
-
-
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-[
-  { "name": "Audit" },
-  { "name": "Protect" },
-]
 ```
 
 
@@ -499,10 +468,8 @@ $ curl https://www.example.com/oauth/tokens \
   -d '{"grant_type":"authorization_code","code":"KwuYwtE69C5dvhbpxwekp5ie"}' \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
-  -H "Authorization: Basic MjA5OTA4N2EtMDdmZi00ZThkLTljOGEtYmZmNWNkNjdlMGRkOnZQZWduZnRWNzUxaHdmTW1ZaGs0RG9FbQ=="
+  -H "Authorization: Basic base64(client_id:client_secret)"
 ```
-
-Response:
 
 ```text
 200 OK
@@ -510,9 +477,6 @@ Response:
 Cache-Control: private, no-store
 Pragma: no-cache
 Content-Type: application/json; charset=utf-8
-Etag: W/"02c4124cd382f6fd8bcd453970193ea4"
-X-Request-Id: 03f7448c-5ae8-4f0c-8fa1-5298665c8a9b
-Transfer-Encoding: chunked
 ```
 ```json
 {
@@ -524,6 +488,75 @@ Transfer-Encoding: chunked
 ```
 
 
+# Grant Types - Authorization Code
+
+```text
+    +--------+                                           +---------------+
+    |        |--(A)------- Authorization Grant --------->|               |
+    |        |                                           |               |
+    |        |<-(B)----------- Access Token -------------|               |
+    |        |               & Refresh Token             |               |
+    |        |                                           |               |
+    |        |                            +----------+   |               |
+    |        |--(C)---- Access Token ---->|          |   |               |
+    |        |                            |          |   |               |
+    |        |<-(D)- Protected Resource --| Resource |   | Authorization |
+    | Client |                            |  Server  |   |     Server    |
+    |        |--(E)---- Access Token ---->|          |   |               |
+    |        |                            |          |   |               |
+    |        |<-(F)- Invalid Token Error -|          |   |               |
+    |        |                            +----------+   |               |
+    |        |                                           |               |
+    |        |--(G)----------- Refresh Token ----------->|               |
+    |        |                                           |               |
+    |        |<-(H)----------- Access Token -------------|               |
+    +--------+           & Optional Refresh Token        +---------------+
+```
+
+```bash
+curl https://auth.test/api/v1/tokens \
+  -X POST \
+  -d '{"grant_type":"refresh_token","refresh_token":"eyJleHAiOjE1NDA5M"}' \
+  -H "Accept: application/json" \
+  -H "Authorization: Basic base64(client_id:client_secret)" \
+  -H "Content-Type: application/json"
+```
+
+
+```text
+Cache-Control: private, no-store
+Content-Type: application/json; charset=utf-8
+Pragma: no-cache
+
+{
+  "access_token": "eyJhbGciOiJSUzI1NiJ9",
+  "token_type": "Bearer",
+  "expires_in": 86400,
+  "refresh_token": "eyJleHAiOjE1NDA5M"
+}
+```
+
+
+# Protocol Flow - Accessing a Protected Resource
+
+`GET /api/policies/`
+
+```text
+GET /api/policies/
+Authorization: Bearer eyJhbGciOiJSUzI1NiJ9
+Accept: application/json
+Content-Type: application/json
+
+
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[
+  { "name": "Audit" },
+  { "name": "Protect" },
+]
+```
 
 
 # Conclusion
@@ -536,6 +569,29 @@ client to gain a new `access_token` and `refresh_token`.
 The exchange process can be triggered when an `access_token` expires or
 is revoked.
 
+```text
+    +--------+                                           +---------------+
+    |        |--(A)------- Authorization Grant --------->|               |
+    |        |                                           |               |
+    |        |<-(B)----------- Access Token -------------|               |
+    |        |               & Refresh Token             |               |
+    |        |                                           |               |
+    |        |                            +----------+   |               |
+    |        |--(C)---- Access Token ---->|          |   |               |
+    |        |                            |          |   |               |
+    |        |<-(D)- Protected Resource --| Resource |   | Authorization |
+    | Client |                            |  Server  |   |     Server    |
+    |        |--(E)---- Access Token ---->|          |   |               |
+    |        |                            |          |   |               |
+    |        |<-(F)- Invalid Token Error -|          |   |               |
+    |        |                            +----------+   |               |
+    |        |                                           |               |
+    |        |--(G)----------- Refresh Token ----------->|               |
+    |        |                                           |               |
+    |        |<-(H)----------- Access Token -------------|               |
+    +--------+           & Optional Refresh Token        +---------------+
+```
+
 
 # Thanks
 
@@ -545,3 +601,4 @@ References:
 * https://jwt.io/
 * https://tools.ietf.org/html/rfc6749
 * https://tools.ietf.org/html/rfc7519
+* https://tools.ietf.org/html/rfc7522
