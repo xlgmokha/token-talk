@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm -fr presentation/*
-vimdeck slideshow --no-ascii presentation.md
+vimdeck slideshow -p 2 --no-ascii --no-filetype presentation.md

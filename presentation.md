@@ -1,7 +1,12 @@
-# Token Talk
+  ,d               88
+  88               88
+MM88MMM ,adPPYba,  88   ,d8  ,adPPYba, 8b,dPPYba,  ,adPPYba,
+  88   a8"     "8a 88 ,a8"  a8P_____88 88P'   `"8a I8[    ""
+  88   8b       d8 8888[    8PP""""""" 88       88  `"Y8ba,
+  88,  "8a,   ,a8" 88`"Yba, "8b,   ,aa 88       88 aa    ]8I
+  "Y888 `"YbbdP"'  88   `Y8a `"Ybbd8"' 88       88 `"YbbdP"'
 
-### aka OAuth 2.0 - Token Exchange
-## with mo
+OAuth2 - Token Exchange with mo
 
 
 # Agenda
@@ -177,7 +182,7 @@ Example Token
 ```
 
 ```text
-eyJhbGciOiJSUzI1NiJ9.  eyJleHAiOjE1NTMyMDYxNDMsImlhdCI6MTU1MzExOTc0MywiaXNzIjoiaHR0cHM6Ly9zaGlyby50ZXN0L21ldGFkYXRhIiwibmJmIjoxNTUzMTE5NzQzLCJqdGkiOiIzMGVlNGYwNi0zZTJiLTRlZjQtOTYxZS01YTFkZmQ1MzBjYTUiLCJzdWIiOiJkOThlY2MwNS1lYWI4LTQ2ODMtODI4OC0yNDkzMTJkM2Y1OTIiLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZW1haWwiOiJtb2toYUBjaXNjby5jb20iLCJmaXJzdF9uYW1lIjoiVHN1eW9zaGkiLCJsYXN0X25hbWUiOiJHYXJyZXR0Iiwib3JnYW5pemF0aW9uX25hbWUiOiJ2b2x0cm9uIiwicm9sZXMiOlsiYWNjb3VudF9hZG1pbiJdfQ.  BrWtDArYiut47Oo76UTD2FGDMgrpFDa2wURVHCMuHb4P6lNP8-fcHqVAOl0bjEqT0RWx6w2MabWBELAWxUWpdVPR-pM_yfIlV0elIQvsFkQOItm8CJlkA-uHGEkBTiqBcOg9ia8ciPKX-sm4SZ0ufYS6kpR0udAOl1Rg0SSJMBkEmkCL4c7wDjACRdm_6M9vXlgpmr388o9wp7Dvd3ts-gRQ4T6BDHxm5F5ckEsnXEIRKstJdFWqgLKCPpyzXYRe5_QAIoB0qWKtzav8tPsKq_hHeKMSXniIY_WF9qMYk3XjxB5aHuqIWaw-zQnZyOUakCYIbgo-CWT8ta0sA0mt9g
+eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE1NTMyMDYxNDMsImlhdCI6MTU1MzExOTc0MywiaXNzIjoiaHR0cHM6Ly9zaGlyby50ZXN0L21ldGFkYXRhIiwibmJmIjoxNTUzMTE5NzQzLCJqdGkiOiIzMGVlNGYwNi0zZTJiLTRlZjQtOTYxZS01YTFkZmQ1MzBjYTUiLCJzdWIiOiJkOThlY2MwNS1lYWI4LTQ2ODMtODI4OC0yNDkzMTJkM2Y1OTIiLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZW1haWwiOiJtb2toYUBjaXNjby5jb20iLCJmaXJzdF9uYW1lIjoiVHN1eW9zaGkiLCJsYXN0X25hbWUiOiJHYXJyZXR0Iiwib3JnYW5pemF0aW9uX25hbWUiOiJ2b2x0cm9uIiwicm9sZXMiOlsiYWNjb3VudF9hZG1pbiJdfQ.  BrWtDArYiut47Oo76UTD2FGDMgrpFDa2wURVHCMuHb4P6lNP8-fcHqVAOl0bjEqT0RWx6w2MabWBELAWxUWpdVPR-pM_yfIlV0elIQvsFkQOItm8CJlkA-uHGEkBTiqBcOg9ia8ciPKX-sm4SZ0ufYS6kpR0udAOl1Rg0SSJMBkEmkCL4c7wDjACRdm_6M9vXlgpmr388o9wp7Dvd3ts-gRQ4T6BDHxm5F5ckEsnXEIRKstJdFWqgLKCPpyzXYRe5_QAIoB0qWKtzav8tPsKq_hHeKMSXniIY_WF9qMYk3XjxB5aHuqIWaw-zQnZyOUakCYIbgo-CWT8ta0sA0mt9g
 ```
 
 
