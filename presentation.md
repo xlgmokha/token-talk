@@ -11,7 +11,7 @@ OAuth2 - Token Exchange with mo
 
 # Agenda
 
-* 1. Authentication vs Authorization
+* 1. Authn vs Authz
 * 2. Tokens
 * 3. Roles
 * 4. Protocol Flow
@@ -19,13 +19,13 @@ OAuth2 - Token Exchange with mo
 * 6. Questions
 
 
-# Authentication vs Authorization
+# Authn vs Authz
 
 * Authentication: to verify the identity of who you are.
 * Authorization: to verify that you should be granted access to a resource or action.
 
 
-# Authentication vs Authorization
+# Authn vs Authz
 
 Example 1: Getting pulled over by the police.
 
@@ -35,7 +35,7 @@ Example 1: Getting pulled over by the police.
 * vehicle registration: authorization
 
 
-# Authentication vs Authorization
+# Authn vs Authz
 
 Example 2: Riding the bus
 
@@ -53,7 +53,7 @@ Authentication is not required.
 ```
 
 
-# Authentication vs Authorization
+# Authn vs Authz
 
 Transferring the token to someone else, authorizes them to ride the bus for 90 minutes.
 You're not supposed to transfer your transit token but detection is difficult.
