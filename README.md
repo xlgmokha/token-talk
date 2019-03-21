@@ -22,6 +22,7 @@ Why? Then How.
 * 3. Roles
 * 4. Protocol Flow
 * 5. Grant Types
+* 6. Examples
 
 
 # Authn vs Authz
@@ -34,7 +35,7 @@ Why? Then How.
 
 Example 1: Flying on a plane
 
-* passport: authentiation
+* passport: authentication
 * plane ticket: authorization
 
 
@@ -349,7 +350,7 @@ Short circuit for SAML service providers.
 * Password Credentials: for trusted clients.
 * Client Credentials: for service authentication.
 * Refresh: for exchanging a refresh token for an access token.
-* Extensions: saml bearer, jwt bearer
+* Extensions: SAML bearer, JWT bearer
 
 
 # Grant Types - Authorization Code
@@ -638,7 +639,7 @@ end
 ```
 
 
-# AWS Secrets Manager
+# Examples - AWS Secrets Manager
 
 > You can customize Lambda functions to extend Secrets Manager rotation to
 > other secret types, such as API keys and OAuth tokens used to
