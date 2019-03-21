@@ -31,7 +31,7 @@ Example 1: Getting pulled over by the police.
 
 > Drivers license and registration?
 
-* driver license: identity
+* drivers license: identity
 * vehicle registration: authorization
 
 
