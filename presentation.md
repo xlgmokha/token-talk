@@ -388,10 +388,10 @@ password: xxxxxx
 
 # Grant Types - Authorization Code
 
-`client_id` will be given the following permissions:
+`client X` would like the following scopes:
 
-    read your profile information
-    write your profile information
+    read your profile information (read:scim.me)
+    write your profile information (write:scim.me)
 
                       [okay]
 
@@ -566,7 +566,7 @@ Content-Type: application/json
 # Conclusion
 
 An `access token` decouples a resource owners credentials from the
-authorization that it is delgating to a client to access protected
+authorization that it is delegating to a client to access protected
 resources from a resource server. A `refresh token` can be used by a
 client to gain a new `access token` and `refresh token`.
 
@@ -597,13 +597,10 @@ is revoked.
 ```
 
 
-# Addendum
+# Addendum - AWS Secrets Manager
 
-> While we’re talking about credential rotation and how to implement it, Voltron team has implemented a form of it already in their services.
-> Mo will present about their approach, rationale, and challenges related to OAuth and it’s implementation within Voltron.
-
-
-> You can customize Lambda functions to extend Secrets Manager rotation to other secret types, such as API keys and OAuth tokens used to authenticate users to mobile applications.
+> You can customize Lambda functions to extend Secrets Manager rotation to
+> other secret types, such as API keys and OAuth tokens used to authenticate users to mobile applications.
 - https://aws.amazon.com/secrets-manager/
 
 
