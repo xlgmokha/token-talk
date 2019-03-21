@@ -21,22 +21,18 @@ OAuth2 - Token Exchange with mo
 
 # Authentication vs Authorization
 
-* Authentication: to verify the identity of the user given the credentials received.
-* Authorization: to determine if the user should be granted access to a particular resource or action.
+* Authentication: to verify the identity of who you are.
+* Authorization: to verify that you should be granted access to a resource or action.
 
 
 # Authentication vs Authorization
 
 Example 1: Getting pulled over by the police.
 
-Woop-woop! That's the sound of...
-
 > Drivers license and registration?
 
 * driver license: identity
 * vehicle registration: authorization
-
-(slightly, flawed example. i know)
 
 
 # Authentication vs Authorization
