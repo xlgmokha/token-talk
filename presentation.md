@@ -230,36 +230,6 @@ it cannot be re-used.
 ```
 
 
-# Tokens - Refresh Token
-
-Refresh Token Grant: This grant can be used by a client to exchange a
-`refresh token` for a new `access token` and `refresh token`.
-
-```text
-POST /token HTTP/1.1
-Authorization: Basic base64(client_id:client_secret)
-Content-Type: application/x-www-form-urlencoded
-
-grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
-```
-
-Response:
-
-```text
-HTTP/1.1 200 OK
-Content-Type: application/json;charset=UTF-8
-Cache-Control: no-store
-Pragma: no-cache
-
-{
-  "access_token":"2YotnFZFEjr1zCsicMWpAA",
-  "token_type":"bearer",
-  "expires_in":3600,
-  "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA",
-}
-```
-
-
 # Roles - OAuth 2.0
 
 * Resource Owner: The HUMAN!
@@ -490,7 +460,10 @@ Content-Type: application/json; charset=utf-8
 ```
 
 
-# Grant Types - Authorization Code
+# Grant Types - Refresh Token
+
+This grant can be used by a client to exchange a
+`refresh token` for a new `access token` and `refresh token`.
 
 ```text
     +--------+                                           +---------------+
@@ -515,41 +488,38 @@ Content-Type: application/json; charset=utf-8
     +--------+           & Optional Refresh Token        +---------------+
 ```
 
-```bash
-curl https://auth.test/api/v1/tokens \
-  -X POST \
-  -d '{"grant_type":"refresh_token","refresh_token":"eyJleHAiOjE1NDA5M"}' \
-  -H "Accept: application/json" \
-  -H "Authorization: Basic base64(client_id:client_secret)" \
-  -H "Content-Type: application/json"
+```text
+POST /token HTTP/1.1
+Authorization: Basic base64(client_id:client_secret)
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=refresh_token&refresh_token=tGzv3JOkF0XG5Qx2TlKWIA
 ```
 
+Response:
 
 ```text
-Cache-Control: private, no-store
-Content-Type: application/json; charset=utf-8
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+Cache-Control: no-store
 Pragma: no-cache
 
 {
-  "access_token": "eyJhbGciOiJSUzI1NiJ9",
-  "token_type": "Bearer",
-  "expires_in": 86400,
-  "refresh_token": "eyJleHAiOjE1NDA5M"
+  "access_token":"2YotnFZFEjr1zCsicMWpAA",
+  "token_type":"bearer",
+  "expires_in":3600,
+  "refresh_token":"tGzv3JOkF0XG5Qx2TlKWIA",
 }
 ```
 
 
 # Protocol Flow - Accessing a Protected Resource
 
-`GET /api/policies/`
-
 ```text
 GET /api/policies/
 Authorization: Bearer eyJhbGciOiJSUzI1NiJ9
 Accept: application/json
 Content-Type: application/json
-
-
 
 HTTP/1.1 200 OK
 Content-Type: application/json
@@ -559,6 +529,38 @@ Content-Type: application/json
   { "name": "Protect" },
 ]
 ```
+
+
+# Moonwalk to this!
+
+```text
+            _,.-"T
+      _.--{~    :l
+    c"     `.    :I
+    |  .-"~-.\    l     .--.
+    | Y_r--. Y) ___I ,-"(~\ Y
+    |[__L__/ j"~=__]~_~\." _/
+ ___|  \.__.r--<~__.T T/ "~/
+'--cl___/\ ( () ).,_L_]}--{
+   `--'   `-^--^\ /___"(~\ Y
+                 "~7/ \ " `/
+                  // //]--[
+                 /> oX |: L
+                //  /  `| o\
+               //. /    I  [
+              / \]/     l: |
+             Y.//       `|_I
+             I_Z         L :]
+            /".-7        [n]l
+           Y / /         I //
+           |] /         /]"/
+           L:/         //./
+          [_7      _  // /
+            _  ,-="_"^K_/
+           [ ][.-~" ~"-.]
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
+
 
 
 # Conclusion
