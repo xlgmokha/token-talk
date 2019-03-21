@@ -286,6 +286,7 @@ behalf.
      +--------+                               +---------------+
 ```
 
+
 # Protocol Flow
 
 Short circuit for SAML service providers.
