@@ -177,7 +177,7 @@ Example Token
 ```
 
 ```text
-eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE1NTMyMDYxNDMsImlhdCI6MTU1MzExOTc0MywiaXNzIjoiaHR0cHM6Ly9zaGlyby50ZXN0L21ldGFkYXRhIiwibmJmIjoxNTUzMTE5NzQzLCJqdGkiOiIzMGVlNGYwNi0zZTJiLTRlZjQtOTYxZS01YTFkZmQ1MzBjYTUiLCJzdWIiOiJkOThlY2MwNS1lYWI4LTQ2ODMtODI4OC0yNDkzMTJkM2Y1OTIiLCJ0b2tlbl90eXBlIjoiYWNjZXNzX3Rva2VuIiwiZW1haWwiOiJtb2toYUBjaXNjby5jb20iLCJmaXJzdF9uYW1lIjoiVHN1eW9zaGkiLCJsYXN0X25hbWUiOiJHYXJyZXR0Iiwib3JnYW5pemF0aW9uX25hbWUiOiJ2b2x0cm9uIiwicm9sZXMiOlsiYWNjb3VudF9hZG1pbiJdfQ.  BrWtDArYiut47Oo76UTD2FGDMgrpFDa2wURVHCMuHb4P6lNP8-fcHqVAOl0bjEqT0RWx6w2MabWBELAWxUWpdVPR-pM_yfIlV0elIQvsFkQOItm8CJlkA-uHGEkBTiqBcOg9ia8ciPKX-sm4SZ0ufYS6kpR0udAOl1Rg0SSJMBkEmkCL4c7wDjACRdm_6M9vXlgpmr388o9wp7Dvd3ts-gRQ4T6BDHxm5F5ckEsnXEIRKstJdFWqgLKCPpyzXYRe5_QAIoB0qWKtzav8tPsKq_hHeKMSXniIY_WF9qMYk3XjxB5aHuqIWaw-zQnZyOUakCYIbgo-CWT8ta0sA0mt9g
+eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE1NTMyMDYx<snip>.BrWtDArYiut47Oo76UTD<snip>
 ```
 
 
@@ -356,7 +356,8 @@ can be stored securely.
 This uses a redirect flow that depends on the user agent having access
 to both the authorization server and the client web app.
 
-## Authorization Code Grant
+
+# Grant Types - Authorization Code
 
 ```text
     +----------+
@@ -397,17 +398,22 @@ https://www.example.com/oauth/authorize
   &scope='read:scim.me write:scim.me'
 ```
 
-----------------------------------------------------
-Login
+```text
+            -----------------
+            Login
 
-username: xxxxxxx
-password: xxxxxx
+            username: xxxxxxx
+            password: xxxxxx
 
-          [login]
+                      [login]
+            -----------------
+```
 
 
 # Grant Types - Authorization Code
 
+```text
+ ----------------------------------------------------
 `client X` would like the following scopes:
 
     read your profile information (read:scim.me)
@@ -415,7 +421,8 @@ password: xxxxxx
 
                       [okay]
 
-----------------------------------------------------
+ ----------------------------------------------------
+```
 
 ```text
 https://www.example.org/oauth/callback
@@ -506,6 +513,8 @@ This grant can be used by a client to exchange a
     +--------+           & Optional Refresh Token        +---------------+
 ```
 
+
+# Grant Types - Refresh Token
 ```text
 POST /token HTTP/1.1
 Authorization: Basic base64(client_id:client_secret)
@@ -580,6 +589,57 @@ Content-Type: application/json
 ```
 
 
+# Examples - Quick & Dirty
+
+```ruby
+namespace :token do
+  desc 'register a new service access/refresh token'
+  task :register, [:token] => [:environment] do |task, args|
+    require 'register_token'
+    puts RegisterToken.new.run(service: :shiro, token: args[:token]).inspect
+  end
+
+  desc 'exchange refresh token for a new access token'
+  task renew: [:environment] do
+    refresh_token = Token.refresh.active.order(created_at: :desc).first
+    refresh_token&.exchange!
+  end
+end
+```
+
+
+# Examples - Quick & Dirty
+
+```ruby
+class Token < ApplicationRecord
+  def exchange!(client: token_exchange_client)
+    response = client.exchange(value)
+    transaction do
+      destroy!
+      Token.create!(
+        service: service,
+        token_type: :access,
+        expires_at: response[:expires_in].to_i.seconds.from_now,
+        value: response[:access_token]
+      )
+      Token.create!(
+        service: service,
+        token_type: :refresh,
+        expires_at: response[:expires_in].to_i.seconds.from_now,
+        value: response[:refresh_token]
+      )
+    end
+  end
+end
+```
+
+
+# AWS Secrets Manager
+
+> You can customize Lambda functions to extend Secrets Manager rotation to
+> other secret types, such as API keys and OAuth tokens used to authenticate users to mobile applications.
+- https://aws.amazon.com/secrets-manager/
+
 
 # Conclusion
 
@@ -613,13 +673,6 @@ is revoked.
     |        |<-(H)----------- Access Token -------------|               |
     +--------+           & Optional Refresh Token        +---------------+
 ```
-
-
-# Addendum - AWS Secrets Manager
-
-> You can customize Lambda functions to extend Secrets Manager rotation to
-> other secret types, such as API keys and OAuth tokens used to authenticate users to mobile applications.
-- https://aws.amazon.com/secrets-manager/
 
 
 # Thanks
