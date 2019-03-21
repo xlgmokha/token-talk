@@ -27,12 +27,10 @@ OAuth2 - Token Exchange with mo
 
 # Authn vs Authz
 
-Example 1: Getting pulled over by the police.
+Example 1: Flying on a plane
 
-> Drivers license and registration?
-
-* drivers license: identity
-* vehicle registration: authorization
+* passport: authentiation
+* plane ticket: authorization
 
 
 # Authn vs Authz
