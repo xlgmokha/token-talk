@@ -1,4 +1,5 @@
 # OAuth2 - Token Exchange with mo
+
 ```text
   ,d               88
   88               88
@@ -8,10 +9,11 @@ MM88MMM ,adPPYba,  88   ,d8  ,adPPYba, 8b,dPPYba,  ,adPPYba,
   88,  "8a,   ,a8" 88`"Yba, "8b,   ,aa 88       88 aa    ]8I
   "Y888 `"YbbdP"'  88   `Y8a `"Ybbd8"' 88       88 `"YbbdP"'
 ```
-https://github.com/mokhan/token-talk
 
 
 # Agenda
+
+https://github.com/mokhan/token-talk
 
 Why? Then How.
 
@@ -679,6 +681,8 @@ is revoked.
 
 
 # Thanks
+
+https://github.com/mokhan/token-talk
 
 References:
 
