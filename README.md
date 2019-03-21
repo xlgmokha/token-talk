@@ -234,7 +234,7 @@ it cannot be re-used.
 
 * Client: Your service, web app, SPA, mobile app.
 * Resource Owner: The HUMAN!
-* Resource Server: The Api
+* Resource Server: The API
 * Authorization Server: The OAuth 2.0 server.
 
 
