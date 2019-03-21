@@ -85,7 +85,7 @@ The purpose of the access token is to allow clients to access a
 protected resource scoped to the privileges defined by the token and
 scope.
 
-The `access_token` represents a subject, audience, issuer and expiration.
+The `access token` represents a subject, audience, issuer and expiration.
 
 ```text
         +------------------------------+
@@ -567,12 +567,12 @@ Content-Type: application/json
 
 # Conclusion
 
-An `access_token` decouples a resource owners credentials from the
+An `access token` decouples a resource owners credentials from the
 authorization that it is delgating to a client to access protected
-resources from a resource server. A `refresh_token` can be used by a
-client to gain a new `access_token` and `refresh_token`.
+resources from a resource server. A `refresh token` can be used by a
+client to gain a new `access token` and `refresh token`.
 
-The exchange process can be triggered when an `access_token` expires or
+The exchange process can be triggered when an `access token` expires or
 is revoked.
 
 ```text
@@ -599,11 +599,22 @@ is revoked.
 ```
 
 
+# Addendum
+
+> While we’re talking about credential rotation and how to implement it, Voltron team has implemented a form of it already in their services.
+> Mo will present about their approach, rationale, and challenges related to OAuth and it’s implementation within Voltron.
+
+
+> You can customize Lambda functions to extend Secrets Manager rotation to other secret types, such as API keys and OAuth tokens used to authenticate users to mobile applications.
+- https://aws.amazon.com/secrets-manager/
+
+
 # Thanks
 
 References:
 
 * https://auth.amp.cisco.com/doc
+* https://aws.amazon.com/secrets-manager/
 * https://jwt.io/
 * https://tools.ietf.org/html/rfc6749
 * https://tools.ietf.org/html/rfc7519
