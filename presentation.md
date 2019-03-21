@@ -11,12 +11,13 @@ OAuth2 - Token Exchange with mo
 
 # Agenda
 
+Why? Then How.
+
 * 1. Authn vs Authz
 * 2. Tokens
 * 3. Roles
 * 4. Protocol Flow
 * 5. Grant Types
-* 6. Questions
 
 
 # Authn vs Authz
@@ -37,8 +38,8 @@ Example 1: Flying on a plane
 
 Example 2: Riding the bus
 
-Transit pass/token authorizes you to ride the bus for 90 minutes.
-Authentication is not required.
+A transit token authorizes you to ride the bus for 90 minutes.
+Proof of identity is not required.
 
 ```text
         +------------------------------+
@@ -94,7 +95,7 @@ The `access token` represents a subject, audience, issuer and expiration.
 
 # Tokens - Access Token
 
-Subject: Ticket holder
+Subject: Ticket bearer
 Audience: Bus Driver
 Issuer: Calgary Transit
 Expiration: 90 minutes from when the ticket was purchased.
@@ -182,11 +183,15 @@ eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE1NTMyMDYxNDMsImlhdCI6MTU1MzExOTc0MywiaXNzIjoiaHR
 
 # Tokens - JWT
 
+JSON Web Signature
+
 ```json
 {
   "alg": "RS256"
 }
 ```
+
+JWT Claims
 ```json
 {
   "exp": 1553206143,
@@ -195,14 +200,6 @@ eyJhbGciOiJSUzI1NiJ9.eyJleHAiOjE1NTMyMDYxNDMsImlhdCI6MTU1MzExOTc0MywiaXNzIjoiaHR
   "nbf": 1553119743,
   "jti": "30ee4f06-3e2b-4ef4-961e-5a1dfd530ca5",
   "sub": "d98ecc05-eab8-4683-8288-249312d3f592",
-  "token_type": "access_token",
-  "email": "mokha@cisco.com",
-  "first_name": "Tsuyoshi",
-  "last_name": "Garrett",
-  "organization_name": "voltron",
-  "roles": [
-    "account_admin"
-  ]
 }
 ```
 
@@ -230,10 +227,10 @@ it cannot be re-used.
 
 # Roles - OAuth 2.0
 
+* Client: Your service, web app, SPA, mobile app.
 * Resource Owner: The HUMAN!
 * Resource Server: The Api
 * Authorization Server: The OAuth 2.0 server.
-* Client: Your service, web app, SPA, mobile app.
 
 
 # Protocol Flow
@@ -286,6 +283,30 @@ behalf.
      |        |--(E)----- Access Token ------>|               |
      |        |                               |   api.amp.*   |
      |        |<-(F)--- Protected Resource ---|               |
+     +--------+                               +---------------+
+```
+
+# Protocol Flow
+
+Short circuit for SAML service providers.
+
+```text
+     +--------+                               +---------------+
+     |        |                               |               |
+     |        |                               |     HUMAN     |
+     |        |                            -- |               |
+     |        |                            |  +---------------+
+     |        |    (A) SAML Authentication |
+     |        |                            |  +---------------+
+     |        |                            -->|               |
+     | my app |                               |   auth.amp.*  |
+     |        |<-(B)----- Access Token -------|               |
+     |        |                               +---------------+
+     |        |
+     |        |                               +---------------+
+     |        |--(C)----- Access Token ------>|               |
+     |        |                               |   api.amp.*   |
+     |        |<-(D)--- Protected Resource ---|               |
      +--------+                               +---------------+
 ```
 
@@ -399,8 +420,6 @@ password: xxxxxx
 https://www.example.org/oauth/callback
   ?grant_type=authorization_code
   &code=secret
-  &redirect_uri=https://www.example.org/oauth/callback
-  &scope='read:scim.me write:scim.me'
 ```
 
 
@@ -435,7 +454,7 @@ https://www.example.org/oauth/callback
 ```bash
 $ curl https://www.example.com/oauth/tokens \
   -X POST \
-  -d '{"grant_type":"authorization_code","code":"KwuYwtE69C5dvhbpxwekp5ie"}' \
+  -d '{"grant_type":"authorization_code","code":"secret"}' \
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   -H "Authorization: Basic base64(client_id:client_secret)"
@@ -610,5 +629,6 @@ References:
 * https://aws.amazon.com/secrets-manager/
 * https://jwt.io/
 * https://tools.ietf.org/html/rfc6749
+* https://tools.ietf.org/html/rfc7515
 * https://tools.ietf.org/html/rfc7519
 * https://tools.ietf.org/html/rfc7522
