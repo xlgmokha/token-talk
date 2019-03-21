@@ -1,3 +1,5 @@
+# OAuth2 - Token Exchange with mo
+```text
   ,d               88
   88               88
 MM88MMM ,adPPYba,  88   ,d8  ,adPPYba, 8b,dPPYba,  ,adPPYba,
@@ -5,8 +7,8 @@ MM88MMM ,adPPYba,  88   ,d8  ,adPPYba, 8b,dPPYba,  ,adPPYba,
   88   8b       d8 8888[    8PP""""""" 88       88  `"Y8ba,
   88,  "8a,   ,a8" 88`"Yba, "8b,   ,aa 88       88 aa    ]8I
   "Y888 `"YbbdP"'  88   `Y8a `"Ybbd8"' 88       88 `"YbbdP"'
-
-OAuth2 - Token Exchange with mo
+```
+https://github.com/mokhan/token-talk
 
 
 # Agenda
@@ -637,7 +639,8 @@ end
 # AWS Secrets Manager
 
 > You can customize Lambda functions to extend Secrets Manager rotation to
-> other secret types, such as API keys and OAuth tokens used to authenticate users to mobile applications.
+> other secret types, such as API keys and OAuth tokens used to
+> authenticate users to mobile applications.
 - https://aws.amazon.com/secrets-manager/
 
 
